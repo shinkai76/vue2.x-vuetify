@@ -1,9 +1,9 @@
 <template>
-    <v-container>
+    <div class="wrap">
         <Nav></Nav>
         <router-view></router-view>
         <Footer></Footer>
-    </v-container>
+    </div>
 </template>
 <script>
 import  Footer from "./footer"
@@ -13,3 +13,9 @@ export default {
     components: { Footer,  Nav}
 }
 </script>
+<style lang="less" scoped>
+.wrap {
+  height: 100%;
+  width: 100%;
+}
+</style>
