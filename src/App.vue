@@ -12,3 +12,6 @@ export default {
   }),
 };
 </script>
+<style lang="less">
+  @import "./css/base.less";
+</style>
