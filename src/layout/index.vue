@@ -1,7 +1,9 @@
 <template>
     <div class="wrap">
         <Nav></Nav>
-        <router-view></router-view>
+        <v-main>
+          <router-view></router-view>
+        </v-main>
         <Footer></Footer>
     </div>
 </template>

@@ -27,6 +27,12 @@
           </v-col>
         </v-row>
       </v-card>
+      <div class="tables-wrap">
+        <v-row no-gutters class="text-center mt-n15">
+          <v-col class="ml-6 mr-4 table-container">123</v-col>
+          <v-col class="mr-6 ml-4 table-container">456</v-col>
+        </v-row>
+      </div>
     </div>
 </template>
 <script>
@@ -99,5 +105,16 @@ export default {
   }
   .mb30 {
     margin-bottom: 30px;
+  }
+  .tables-wrap {
+    position: relative;
+    z-index: 10;
+    .table-container {
+      width: 560px;
+      height: 531px;
+      background: #FFFFFF;
+      box-shadow: 2px 2px 8px 0px rgba(45, 69, 133, 0.17);
+      border-radius: 10px;
+    }
   }
 </style>

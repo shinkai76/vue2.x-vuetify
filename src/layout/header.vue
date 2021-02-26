@@ -1,8 +1,8 @@
 <template>
-  <v-card height="70px"
+    <v-app-bar app height="70px"
           class="head rounded-0"
           min-width="100%"
-          flat
+          fixed
   >
     <div class="w1200 mx-auto nav-wrap d-flex justify-start align-center">
       <v-img class="flex-grow-0 ml-11" src="../assets/pic_logo.png" alt="logo" height="40" width="130" />
@@ -64,7 +64,8 @@
         </v-expand-transition>
       </div>
     </div>
-  </v-card>
+  </v-app-bar>
+  </v-container>
 </template>
 <script>
 export default {
@@ -158,6 +159,12 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+#nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2000;
+}
 .head {
   background: linear-gradient(270deg, #0A225E 0%, #030D2E 100%);
 
