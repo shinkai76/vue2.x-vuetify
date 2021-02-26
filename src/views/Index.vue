@@ -1,5 +1,5 @@
 <template>
-    <div class="page-wrap pt-5">
+    <div class="page-wrap pt-5 pb-9">
       <v-card class="current-info-wrap" flat>
         <v-row  no-gutters justify="center">
           <input class="search-input" type="text"
@@ -23,22 +23,79 @@
             </v-row>
           </v-col>
           <v-col cols="2" class="progress-wrap">
-            进度图
+            <v-progress-circular
+                :value="80"
+                color="#57F3FF"
+                :size="80"
+                :width="12"
+            >80</v-progress-circular>
           </v-col>
         </v-row>
       </v-card>
       <div class="tables-wrap">
         <v-row no-gutters class="text-center mt-n15">
-          <v-col class="ml-6 mr-4 table-container">123</v-col>
-          <v-col class="mr-6 ml-4 table-container">456</v-col>
+          <v-col class="ml-6 mr-4 table-container">
+            <vBlockTable :headers="blockHeaders" :data="blockData"/>
+          </v-col>
+          <v-col class="mr-6 ml-4 table-container">
+            <vTradeTable :headers="tradeHeaders" :data="blockData"/>
+          </v-col>
         </v-row>
       </div>
     </div>
 </template>
 <script>
+import vBlockTable from "@/components/vBlockTable"
+import vTradeTable from "@/components/vTradeTable"
 export default {
     name: "index",
+    components: {vTradeTable, vBlockTable},
     data: ()=> ({
+      tradeHeaders: [
+        {
+          text: '交易哈希',
+          align: 'center',
+          value: 'name1',
+        },
+        {
+          text: '方向',
+          align: 'center',
+          value: 'name2',
+        },
+        {
+          text: '金额',
+          align: 'center',
+          value: 'name3',
+        }
+      ],
+      blockData: [{
+        name1: '1',
+        name2: '2',
+        name3: '3',
+        name4: '4',
+      }],
+      blockHeaders: [
+        {
+          text: '区块高度',
+          align: 'center',
+          value: 'name1',
+        },
+        {
+          text: '节点',
+          align: 'center',
+          value: 'name2',
+        },
+        {
+          text: '交易数量',
+          align: 'center',
+          value: 'name3',
+        },
+        {
+          text: '时间',
+          align: 'center',
+          value: 'name4',
+        },
+      ],
       searchValue: '',
       infoItems: ['最新区块高度', '交易总数量', '账户总数量', '投票数量', '合约总数', '节点数量',
       '质押TAFT总量', '参与投票人数'],
@@ -52,8 +109,20 @@ export default {
     },
     methods: {
       init(){
+        this.getBlockData()
+        this.getTradeData()
+      },
+      getBlockData() {
+        this.blockLoading = true
 
-      }
+      },
+      getTradeData() {
+        this.tradeLoading = true
+
+      },
+      clickRow(row) {
+        console.log( row )
+      },
     }
 }
 </script>
