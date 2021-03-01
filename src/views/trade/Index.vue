@@ -1,6 +1,6 @@
 <template>
   <div class="w1200 pt-5 mx-auto">
-    <TopSearch :placeholder="searchPlaceholder" :value="searchValue" @search="onSearch" />
+    <TopSearch :placeholder="search.placeholder" :value="search.value" @search="onSearch" />
     <div class="table-wrap mt30">
       <vBlockTable :currentPage="currentPage" :limit="limit" >
         <template v-slot:title>
@@ -28,12 +28,14 @@ export default {
   name: "trade",
   components: { TopSearch, vBlockTable },
   data: ()=>({
-    searchPlaceholder: '区块高度',
-    searchValue: '',
-    loading: false,
+    search: {
+      placeholder: '区块高度',
+      value: ''
+    },
     limit: 11, // 请求11条数据
     currentPage: 1,
-    pageTotal: 3
+    pageTotal: 3,
+    loading: false
   }),
   created() {
     this.init()
@@ -63,4 +65,10 @@ export default {
 
 <style scoped lang="less">
 
+.table-wrap {
+  width: 1200px;
+  background: #FFFFFF;
+  box-shadow: 2px 2px 8px 0px rgba(45, 69, 133, 0.17);
+  border-radius: 10px;
+}
 </style>
