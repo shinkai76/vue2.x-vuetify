@@ -35,10 +35,16 @@
       <div class="tables-wrap">
         <v-row no-gutters class="text-center mt-n15">
           <v-col class="ml-6 mr-4 table-container">
-            <vBlockTable :headers="blockHeaders" :data="blockData"/>
+            <vBlockTable :limit="8" :page="1" />
+            <div class="text-center mx-auto default-blue" @click="changeRoute()">
+              查看更多>>
+            </div>
           </v-col>
           <v-col class="mr-6 ml-4 table-container">
-            <vTradeTable :headers="tradeHeaders" :data="blockData"/>
+            <vTradeTable :limit="8" :page="1" />
+            <div class="text-center mx-auto default-blue" @click="changeRoute()">
+              查看更多>>
+            </div>
           </v-col>
         </v-row>
       </div>
@@ -51,51 +57,6 @@ export default {
     name: "index",
     components: {vTradeTable, vBlockTable},
     data: ()=> ({
-      tradeHeaders: [
-        {
-          text: '交易哈希',
-          align: 'center',
-          value: 'name1',
-        },
-        {
-          text: '方向',
-          align: 'center',
-          value: 'name2',
-        },
-        {
-          text: '金额',
-          align: 'center',
-          value: 'name3',
-        }
-      ],
-      blockData: [{
-        name1: '1',
-        name2: '2',
-        name3: '3',
-        name4: '4',
-      }],
-      blockHeaders: [
-        {
-          text: '区块高度',
-          align: 'center',
-          value: 'name1',
-        },
-        {
-          text: '节点',
-          align: 'center',
-          value: 'name2',
-        },
-        {
-          text: '交易数量',
-          align: 'center',
-          value: 'name3',
-        },
-        {
-          text: '时间',
-          align: 'center',
-          value: 'name4',
-        },
-      ],
       searchValue: '',
       infoItems: ['最新区块高度', '交易总数量', '账户总数量', '投票数量', '合约总数', '节点数量',
       '质押TAFT总量', '参与投票人数'],
@@ -109,19 +70,13 @@ export default {
     },
     methods: {
       init(){
-        this.getBlockData()
-        this.getTradeData()
-      },
-      getBlockData() {
-        this.blockLoading = true
-
-      },
-      getTradeData() {
-        this.tradeLoading = true
-
       },
       clickRow(row) {
         console.log( row )
+      },
+
+      changeRoute() {
+
       },
     }
 }

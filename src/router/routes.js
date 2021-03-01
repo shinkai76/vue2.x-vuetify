@@ -10,7 +10,21 @@ const routes = [
                 path: "/home",
                 name: "home",
                 component:()=> import("@/views/Index.vue")
-            }
+            },
+
+            {
+                path: "/trade",
+                name: "trade",
+                component: ()=> import("@/views/trade/Index")
+            },
+            {
+                path: "/tradeDetail",
+                name: "tradeDetail",
+                meta: {
+                    keepAlive: true
+                },
+                component: ()=> import("@/views/trade/Detail")
+            },
         ]
     },
     {

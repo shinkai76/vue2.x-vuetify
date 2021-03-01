@@ -1,7 +1,7 @@
 <template>
   <v-card flat  v-bind="$attrs">
     <v-card-title class="d-flex justify-center">
-      区块
+      <slot name="title">区块</slot>
     </v-card-title>
     <v-data-table
         @click:row="clickRow"
@@ -15,7 +15,7 @@
         loading-text="Loading..."
     >
       <template v-slot:item.name1="{ item }">
-        <span class="default-blue">{{ item.name1 }}</span>
+        <span class="default-blue" @click="toDetail(item)">{{ item.name1 }}</span>
       </template>
       <template v-slot:item.name2="{ item }">
         <div class="d-flex">
@@ -35,11 +35,6 @@
           </div>
         </div>
       </template>
-      <template v-slot:footer>
-        <div class="text-center mx-auto default-blue" @click="changeRoute()">
-          查看更多>>
-        </div>
-      </template>
     </v-data-table>
   </v-card>
 </template>
@@ -49,16 +44,49 @@ export default {
   name: "vBlockTable",
   data: ()=> ({
     loading: false,
-    headers: [],
-    data: [],
+    headers: [
+      {
+        text: '区块高度',
+        align: 'center',
+        value: 'name1',
+      },
+      {
+        text: '节点',
+        align: 'center',
+        value: 'name2',
+      },
+      {
+        text: '交易数量',
+        align: 'center',
+        value: 'name3',
+      },
+      {
+        text: '时间',
+        align: 'center',
+        value: 'name4',
+      },
+    ],
+    data: [{
+      name1: '1',
+      name2: '2',
+      name3: '3',
+      name4: '4',
+    }],
     isDetailShow: false,
-
+    page: undefined,
+    limit: undefined
   }),
-  mounted() {
+  props: ['currentPage'],
+  created() {
     console.log(this.$attrs)
-    this.headers = this.$attrs.headers
-    this.data = this.$attrs.data
-    this.title = this.$attrs.title
+  },
+  watch: {
+    currentPage(cur) {
+      this.page = cur
+      this.getData()
+    }
+  },
+  mounted() {
     this.init()
   },
   methods: {
@@ -74,8 +102,13 @@ export default {
     getData() {
       this.loading = true
     },
-    changeRoute() {
-
+    toDetail(item) {
+      this.$router.push({
+        path: '/tradeDetail',
+        query: {
+          item
+        }
+      })
     },
     showDetail() {
       this.isDetailShow = true

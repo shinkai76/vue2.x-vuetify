@@ -14,7 +14,7 @@
              :class="['nav-block', 'nav-block-'+ index]"
              @mouseenter="currentIdx = index"
         >
-          <div class="nav-text">
+          <div class="nav-text" @click="routeChange(item.path)">
             {{ item.text }}
             <v-icon v-if="index === 1"
                     dark
@@ -31,6 +31,7 @@
               <div class="nav-submenu transition-fast-in-fast-out"
                    v-for="sub in item.children"
                    :key="sub.text"
+                   @click="routeChange(sub.path)"
               >
                 {{ sub.text }}
               </div>
@@ -65,7 +66,6 @@
       </div>
     </div>
   </v-app-bar>
-  </v-container>
 </template>
 <script>
 export default {
@@ -117,13 +117,15 @@ export default {
     showLangMenu: false,
     navItems: [
       {
-        text: '首页'
+        text: '首页',
+        path: '/'
       },
       {
         text: '区块',
         children: [
           {
-            text: '交易'
+            text: '交易',
+            path: '/trade'
           }
         ]
       },
@@ -154,6 +156,9 @@ export default {
     selectLang({src, name}) {
       this.navLangFlag = src
       this.navLangName = name
+    },
+    routeChange(path) {
+      this.$router.push(path)
     }
   }
 }

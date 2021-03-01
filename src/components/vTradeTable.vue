@@ -41,15 +41,38 @@ export default {
   name: "vTradeTable",
   data: ()=> ({
     loading: false,
-    headers: [],
-    data: []
-
+    headers: [
+      {
+        text: '交易哈希',
+        align: 'center',
+        value: 'name1',
+      },
+      {
+        text: '方向',
+        align: 'center',
+        value: 'name2',
+      },
+      {
+        text: '金额',
+        align: 'center',
+        value: 'name3',
+      }
+    ],
+    data: [],
+    page: undefined,
+    limit: undefined
   }),
-  mounted() {
+  props: ['currentPage'],
+  created() {
     console.log(this.$attrs)
-    this.headers = this.$attrs.headers
-    this.data = this.$attrs.data
-    this.title = this.$attrs.title
+  },
+  watch: {
+    currentPage(cur) {
+      this.page = cur
+      this.getData()
+    }
+  },
+  mounted() {
     this.init()
   },
   methods: {

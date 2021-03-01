@@ -2,7 +2,10 @@
     <div class="wrap">
         <Nav></Nav>
         <v-main>
-          <router-view></router-view>
+          <keep-alive v-if="$route.meta.keepAlive">
+            <router-view />
+          </keep-alive>
+          <router-view v-if="!$route.meta.keepAlive" />
         </v-main>
         <Footer></Footer>
         <vMsg></vMsg>
